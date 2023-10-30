@@ -1,0 +1,106 @@
+EIGENPORTFOLIOS:
+
+
+ADDRESS THIS
+
+1. observations
+- regilarizar autovetores -> soma = 1
+- para mantener los pesos negativos -> entradas positivas = 1; entrados negativoas = -1
+- aconbtee que turnover va a ser mayor ()
+    - solo que el protfaolio es autofinanciable!! por que lo que vendo es lo mismo que gasto! (es estrategia portatil)
+- Longoing , shortgoing portfolio
+- EVITAR TER ALAVANCAGEM!
+    - Although it would be interesting, for future work perhaps, 
+
+2. Metrics
+
+-> seda tiempo
+-> deflated sharpe ratio -> evaluar si es ruido o significacia estadística 
+-> comentario a mas dado los factores homogeneos y no dependeintes de tiempo
+
+
+
+
+1. Reading the data
+
+We first grab this 9 stocks as they have a similar weight to the market, which is convenient for building a covariance matrix from which the risk factors are going to be extracted. Avoids survivor bias
+
+
+- 10 years -> "2013-01-15" , "2023-01-20"
+- Benchmark -> Ibovespa
+
+
+
+
+2. Eigenportfolios - PCA
+
+First of all, the eigenportfolios are just represented as the eigenvectors calculated from the covariance/correlation matrix. Put it in other words, the weights of an eigenportfolio, are just simply the vector values of the eigenvectors extracted for the covariance matrix.
+
+Hence, from an economical point of view, each eigenvector of such matrix is intepreted as a risk factor that drives the behaviour of the set of stocks that compound the portfolio (or the market itself, when the set of stocks is representative enough to describe the market). As an example, such risk factors could be currency risk, advancements in techonolgy (if the sector is related to tech), consumer preferences (for other sectors), and so on. 
+
+Eigenportfolios offer advatanges in terms of diversification as the basis for each eigeportfolio are orthogonal to each other. In other words each risk factor is mathematically idependant from each other, which means we can leverage from this property to identify to diversificate and mitigate risk even further, as many authords have done it (put some references).
+
+<br>
+<br>
+
+### Experiement description - Eigenportfolio part
+
+Fir this part, the next steps have been implemented:
+
+1. Get the returns/log-returns from the prices series
+2. Split the data in train and test (or out of sample)
+3. From the tran set, estimate the sampled covariance matrix
+4. Using Random Matrix Filtering theory, we cleanse the sampled covariance matrix from the eigenvalues associated with noise, which is translated in "filtering" the risk factors that probably are associated with noise or suprious effects.
+    4.1 As a side note, there are several references that also state that cleansing the empirical covariance matrix this way, also tend to deliver less biased estimators to the real covariance matrix as noise is canceled some how.
+5. Reconstruct the empirical covariance matrix regarding only the significant eigenvectors 
+6. Asuume this eigenvectors are the eigenportfolios, and calculate each one performance over the out-of-sample set
+
+<br>
+<br>
+
+**Side note:** <br>
+Assess wether the validation must be done from the beginning, also including trainset as cumulative results are a fucntion of the histoical returns (although the portfolios were estimated considering just the train set)
+
+
+
+
+Results
+
+- when variations are big (big amplitudede) -> big eigen values! -> market index!
+- Get from small components.. daily transitions -> are captured by small components (freq vs ampl) -> but this is working with SSA and the covariance matrix with the lagged Series! does not applies to this!
+- there are already experiments with heavy backtesting
+
+
+
+- when variations are big (big amplitudede) -> big eigen values! -> market index!
+- Get from small components.. daily transitions -> are captured by small components (freq vs ampl) -> but this is working with SSA and the covariance matrix with the lagged Series! does not applies to this!
+- there are already experiments with heavy backtesting
+
+
+The results, as displayed above, are going to be inputs to feed the non-linear algorithm based on autoencoders in order to explore the gains of idenitfying non-linerities in the portfolio
+
+
+
+
+
+GENERATE SPEACH
+
+- BEGIN FROM THE END TO THE BEGINNING
+
+
+Luiz obsevations
+
+- Normalize adequately: Autofinanciable for lonh short
+
+
+
+
+- First conclusion, mind the noise as diversification opportunities without the proper care (risk components associated with other risk factors such as exchange, sectors, etc.), might be associated to spurious correlations!! not significant risk factors!
+
+
+
+AUTOENCODERS OBSERVATIONS
+
+- Observation outside the index tend to generate noise
+- Short portfolios  are not able to reproduce just by includibng uncorrelated market stocks
+- 

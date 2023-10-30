@@ -1,0 +1,6 @@
+Experiemnts pending to dissertation:
+
+- index (ongoing)
+- bottom coommunal: Decaying effect -> more noise!
+- tanh for short-long portfolios
+    - Subsuquent components
